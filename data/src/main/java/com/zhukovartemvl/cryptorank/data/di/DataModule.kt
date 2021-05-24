@@ -45,4 +45,7 @@ private fun createHttpClient(json: Json) = HttpClient(Android) {
     install(JsonFeature) {
         serializer = KotlinxSerializer(json)
     }
+    engine {
+        connectTimeout = 10_000
+    }
 }

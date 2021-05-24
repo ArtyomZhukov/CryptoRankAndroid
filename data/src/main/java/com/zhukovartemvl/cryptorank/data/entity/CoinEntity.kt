@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-@Entity(tableName = "coin")
+@Entity
 data class CoinEntity(
     @SerialName("uuid") val uuid: String,
     @SerialName("name") val name: String,

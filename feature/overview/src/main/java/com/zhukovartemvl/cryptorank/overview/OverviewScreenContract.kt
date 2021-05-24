@@ -17,6 +17,7 @@ class OverviewScreenContract {
     sealed class ScreenState {
         object Loading : ScreenState()
         object Default : ScreenState()
+        data class Error(val errorMessage: String) : ScreenState()
         object Refreshing : ScreenState()
     }
 
@@ -34,6 +35,7 @@ class OverviewScreenContract {
     }
 
     sealed class Action : UiAction {
+        object None : Action()
         data class Error(val error: Exception) : Action()
     }
 

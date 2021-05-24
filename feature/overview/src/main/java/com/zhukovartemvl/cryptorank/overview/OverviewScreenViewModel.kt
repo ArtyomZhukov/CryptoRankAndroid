@@ -58,6 +58,7 @@ class OverviewScreenViewModel : BaseViewModel<Event, State, Action>(), KoinCompo
                 }
             }.doOnFailure { error ->
                 setAction { Action.Error(error) }
+                setState { copy(screenState = ScreenState.Error(error.localizedMessage ?: "")) }
             }
     }
 

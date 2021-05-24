@@ -2,6 +2,7 @@ package com.zhukovartemvl.cryptorank.overview.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,68 +30,72 @@ internal fun CoinItem(
     change: Float,
     sparklineItems: List<Float>
 ) {
-    Row(
-        modifier = Modifier
-            .height(60.dp)
-            .padding(vertical = 5.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Row(modifier = Modifier.weight(5f)) {
-            Text(
-                modifier = Modifier
-                    .width(30.dp)
-                    .align(Alignment.CenterVertically),
-                text = rank.toString(),
-                textAlign = TextAlign.Center,
-                style = CryptoRankText.ItemText
-            )
-            Image(
-                modifier = Modifier.padding(6.dp).size(32.dp),
-                painter = rememberGlidePainter(request = iconUrl),
-                contentScale = ContentScale.Fit,
-                contentDescription = null
-            )
-            Column {
+    Card(elevation = 4.dp) {
+        Row(
+            modifier = Modifier
+                .height(60.dp)
+                .padding(vertical = 5.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(modifier = Modifier.weight(5f)) {
                 Text(
-                    text = name,
-                    style = CryptoRankText.ItemTitleText,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = symbol,
+                    modifier = Modifier
+                        .width(30.dp)
+                        .align(Alignment.CenterVertically),
+                    text = rank.toString(),
+                    textAlign = TextAlign.Center,
                     style = CryptoRankText.ItemText
                 )
-            }
-        }
-        Row(modifier = Modifier.weight(2f)) {
-            Column {
-                Text(
-                    text = price.toPriceString(),
-                    style = CryptoRankText.ItemTitleText
+                Image(
+                    modifier = Modifier
+                        .padding(6.dp)
+                        .size(32.dp),
+                    painter = rememberGlidePainter(request = iconUrl),
+                    contentScale = ContentScale.Fit,
+                    contentDescription = null
                 )
-                Text(
-                    text = marketCap.toMarketCapString(),
-                    style = CryptoRankText.ItemText
-                )
+                Column {
+                    Text(
+                        text = name,
+                        style = CryptoRankText.ItemTitleText,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = symbol,
+                        style = CryptoRankText.ItemText
+                    )
+                }
             }
-        }
-        Row(modifier = Modifier.weight(2f)) {
-            val color = if (change >= 0) Color.Green else Color.Red
+            Row(modifier = Modifier.weight(2f)) {
+                Column {
+                    Text(
+                        text = price.toPriceString(),
+                        style = CryptoRankText.ItemTitleText
+                    )
+                    Text(
+                        text = marketCap.toMarketCapString(),
+                        style = CryptoRankText.ItemText
+                    )
+                }
+            }
+            Row(modifier = Modifier.weight(2f)) {
+                val color = if (change >= 0) Color.Green else Color.Red
 
-            Column {
-                Text(
-                    text = change.toPercentString(),
-                    modifier = Modifier.fillMaxWidth(),
-                    color = color,
-                    style = CryptoRankText.ItemTitleText,
-                    textAlign = TextAlign.Center
-                )
-                Sparkline(
-                    modifier = Modifier.fillMaxSize(),
-                    lineColor = color,
-                    values = sparklineItems
-                )
+                Column {
+                    Text(
+                        text = change.toPercentString(),
+                        modifier = Modifier.fillMaxWidth(),
+                        color = color,
+                        style = CryptoRankText.ItemTitleText,
+                        textAlign = TextAlign.Center
+                    )
+                    Sparkline(
+                        modifier = Modifier.fillMaxSize(),
+                        lineColor = color,
+                        values = sparklineItems
+                    )
+                }
             }
         }
     }

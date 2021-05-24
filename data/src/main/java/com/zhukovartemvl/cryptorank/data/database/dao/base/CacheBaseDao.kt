@@ -1,44 +1,54 @@
 package com.zhukovartemvl.cryptorank.data.database.dao.base
 
-import androidx.room.Insert
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteQuery
-import androidx.room.RawQuery
 import androidx.sqlite.db.SimpleSQLiteQuery
+import androidx.room.RawQuery
+import androidx.room.Delete
 import androidx.room.OnConflictStrategy
-import androidx.room.Dao
+import java.lang.reflect.ParameterizedType
 
 
 @Dao
-abstract class CacheBaseDao<T>(private val tableName: String) {
+abstract class CacheBaseDao<T>() {
 
     open fun getAll(): List<T> {
-        val query =
-            SimpleSQLiteQuery("select * from $tableName where deleteFlag = 0 order by sortKey")
+        val query = SimpleSQLiteQuery(
+            "select * from " + getTableName()
+        )
         return doGetAll(query)
     }
 
     open fun getById(id: Int): T {
         val query = SimpleSQLiteQuery(
-            "select * from $tableName where id = ?",
-            arrayOf<Any>(id)
+            "select * from " + getTableName() + " where id = ?", arrayOf<Any>(id)
         )
         return doGetById(query)
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(entity: T)
+    abstract fun insert(entity: T): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertAll(entities: List<T>)
+    abstract fun insertAll(entities: List<T>): LongArray
 
-    fun deleteAll(): Int {
-        val query = SimpleSQLiteQuery("delete from $tableName")
+    @Delete
+    abstract fun delete(entity: T)
+
+    open fun deleteAll(): Int {
+        val query = SimpleSQLiteQuery("delete from " + getTableName())
         return doDeleteAll(query)
     }
 
+    open fun getTableName(): String {
+        val clazz =
+            (javaClass.superclass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<*>
+        return clazz.simpleName
+    }
+
     fun itemsCount(): Int {
-        val query = SimpleSQLiteQuery("select count(*) from $tableName")
-        return doDeleteAll(query)
+        val query = SimpleSQLiteQuery("select count(*) from " + getTableName())
+        return doGetItemsCount(query)
     }
 
     @RawQuery
@@ -52,5 +62,4 @@ abstract class CacheBaseDao<T>(private val tableName: String) {
 
     @RawQuery
     protected abstract fun doGetItemsCount(query: SupportSQLiteQuery): Int
-
 }
