@@ -13,6 +13,7 @@ import com.zhukovartemvl.cryptorank.data.preferences.CachePreferences
 import com.zhukovartemvl.cryptorank.data.preferences.impl.CachePreferencesImpl
 import com.zhukovartemvl.cryptorank.data.repository.CoinRepositoryImpl
 import io.ktor.client.*
+import io.ktor.client.engine.android.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import kotlinx.serialization.json.Json
@@ -40,7 +41,7 @@ private fun getDatabase(context: Context) =
 
 private fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }
 
-private fun createHttpClient(json: Json) = HttpClient {
+private fun createHttpClient(json: Json) = HttpClient(Android) {
     install(JsonFeature) {
         serializer = KotlinxSerializer(json)
     }

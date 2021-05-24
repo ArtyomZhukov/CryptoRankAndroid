@@ -52,10 +52,7 @@ dependencies {
     implementation("io.ktor:ktor-client-json:1.5.3")
     implementation("io.ktor:ktor-client-logging:1.5.3")
     implementation("io.ktor:ktor-client-serialization:1.5.3")
-
-    //Serialization
-//    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
-//    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
+    implementation("io.ktor:ktor-client-android:1.5.3")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")

@@ -30,6 +30,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        useIR = true
     }
     buildFeatures {
         compose = true
@@ -49,6 +50,8 @@ dependencies {
     api("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
     api("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
     api("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
+    api("androidx.compose.runtime:runtime-livedata:${rootProject.extra["compose_version"]}")
+
 
     //Navigation
     api("androidx.navigation:navigation-ui-ktx:2.3.5")
@@ -60,7 +63,7 @@ dependencies {
     api("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
 
     //DI-Compose
-    api("io.insert-koin:koin-androidx-compose:3.0.1")
+    api("io.insert-koin:koin-android:3.0.2")
 
 
     testImplementation("junit:junit:4.13.2")
