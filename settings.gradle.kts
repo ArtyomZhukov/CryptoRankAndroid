@@ -3,9 +3,14 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
     }
 }
 rootProject.name = "CryptoRank"
 include(":app")
- 
+include(":data")
+include(":shared:core-ui")
+include(":shared:core")
+include(":shared:resources")
+
+include(":feature:overview")
+include(":feature:activity")
