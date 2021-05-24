@@ -63,16 +63,17 @@ class OverviewScreenViewModel : BaseViewModel<Event, State, Action>(), KoinCompo
     }
 
     private fun changeListOrder(listOrder: ListOrder) {
-        val newListOrder = listOrder
-        if (currentState.listOrder == listOrder) {
-            newListOrder.apply { ascending = !currentState.listOrder.ascending }
+        if (currentState.listOrder::class == listOrder::class) {
+            listOrder.apply {
+                ascending = !currentState.listOrder.ascending
+            }
         }
 
         val coins = currentState.coins
         setState {
             copy(
-                coins = coins.sort(newListOrder),
-                listOrder = newListOrder
+                coins = coins.sort(listOrder),
+                listOrder = listOrder
             )
         }
     }
