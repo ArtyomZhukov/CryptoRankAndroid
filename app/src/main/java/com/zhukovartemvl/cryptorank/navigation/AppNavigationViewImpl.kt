@@ -9,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.zhukovartemvl.cryptorank.core_ui.navigation.AppNavigationParams
 import com.zhukovartemvl.cryptorank.core_ui.navigation.AppNavigationView
 import com.zhukovartemvl.cryptorank.overview.OverviewScreen
-import com.zhukovartemvl.cryptorank.ui.theme.CryptoRankTheme
+import com.zhukovartemvl.cryptorank.core_ui.theme.CryptoRankTheme
 
 
 class AppNavigationViewImpl : AppNavigationView {

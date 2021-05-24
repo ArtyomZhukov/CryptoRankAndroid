@@ -40,7 +40,8 @@ class OverviewScreenViewModel : BaseViewModel<Event, State, Action>(), KoinCompo
             Event.OnPriceClicked -> {
                 changeListOrder(ListOrder.Price())
             }
-            is Event.Refresh -> {
+            Event.Refresh -> {
+                setState { copy(screenState = ScreenState.Refreshing) }
                 loadCoins(true)
             }
         }
@@ -61,15 +62,16 @@ class OverviewScreenViewModel : BaseViewModel<Event, State, Action>(), KoinCompo
     }
 
     private fun changeListOrder(listOrder: ListOrder) {
+        val newListOrder = listOrder
         if (currentState.listOrder == listOrder) {
-            listOrder.apply { ascending = !ascending }
+            newListOrder.apply { ascending = !currentState.listOrder.ascending }
         }
 
         val coins = currentState.coins
         setState {
             copy(
-                coins = coins.sort(listOrder),
-                listOrder = listOrder
+                coins = coins.sort(newListOrder),
+                listOrder = newListOrder
             )
         }
     }

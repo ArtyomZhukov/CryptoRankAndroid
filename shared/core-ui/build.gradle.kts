@@ -59,6 +59,7 @@ dependencies {
 
     //UI - Compose - Accompanist
     api("com.google.accompanist:accompanist-swiperefresh:0.8.1")
+    api( "com.google.accompanist:accompanist-glide:0.10.0")
 
     api("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
 

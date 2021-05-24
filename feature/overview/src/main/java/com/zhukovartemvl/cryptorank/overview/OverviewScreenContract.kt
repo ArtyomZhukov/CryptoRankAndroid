@@ -17,6 +17,7 @@ class OverviewScreenContract {
     sealed class ScreenState {
         object Loading : ScreenState()
         object Default : ScreenState()
+        object Refreshing : ScreenState()
     }
 
     sealed class ListOrder(var ascending: Boolean) {
@@ -29,7 +30,7 @@ class OverviewScreenContract {
         object OnCryptocurrencyClicked : Event()
         object OnPriceClicked : Event()
         object OnDayChangeClicked : Event()
-        data class Refresh(val forceLoad: Boolean) : Event()
+        object Refresh : Event()
     }
 
     sealed class Action : UiAction {

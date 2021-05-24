@@ -1,4 +1,4 @@
-package com.zhukovartemvl.cryptorank.ui.theme
+package com.zhukovartemvl.cryptorank.core_ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
