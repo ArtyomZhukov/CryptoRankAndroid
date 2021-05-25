@@ -10,13 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.sp
-import com.google.accompanist.glide.rememberGlidePainter
+import com.google.accompanist.coil.rememberCoilPainter
+import com.zhukovartemvl.cryptorank.core.utils.toMarketCapString
+import com.zhukovartemvl.cryptorank.core.utils.toPercentString
+import com.zhukovartemvl.cryptorank.core.utils.toPriceString
 import com.zhukovartemvl.cryptorank.core_ui.theme.CryptoRankText
+import com.zhukovartemvl.cryptorank.core_ui.utils.getSvgImageLoader
 
 
 @Composable
@@ -50,11 +51,15 @@ internal fun CoinItem(
                     modifier = Modifier
                         .padding(6.dp)
                         .size(32.dp),
-                    painter = rememberGlidePainter(request = iconUrl),
+                    painter = rememberCoilPainter(
+                        request = iconUrl,
+                        imageLoader = getSvgImageLoader()
+                    ),
                     contentScale = ContentScale.Fit,
                     contentDescription = null
                 )
-                Column {
+
+                Column(modifier = Modifier.padding(start = 4.dp)) {
                     Text(
                         text = name,
                         style = CryptoRankText.ItemTitleText,
@@ -100,46 +105,3 @@ internal fun CoinItem(
         }
     }
 }
-
-@Composable
-private fun PrimaryText(text: String) {
-    Text(
-        text = text,
-        style = TextStyle(
-            fontSize = 16.sp,
-            color = Color.Black,
-            fontWeight = FontWeight.Bold
-        )
-    )
-}
-
-@Composable
-private fun SecondaryText(text: String) {
-    Text(
-        text = text,
-        style = TextStyle(
-            fontSize = 15.sp,
-            color = Color.Gray,
-            fontWeight = FontWeight.Normal
-        )
-    )
-}
-
-private fun Float.toPriceString() = "$ " + "%.2f".format(this)
-private fun Float.toMarketCapString(): String {
-    val (number, suffix) = when {
-        this > trillion.first -> Pair(this / trillion.first, trillion.second)
-        this > billion.first -> Pair(this / billion.first, billion.second)
-        this > million.first -> Pair(this / million.first, million.second)
-        this > thousand.first -> Pair(this / thousand.first, thousand.second)
-        else -> Pair(this, "")
-    }
-    return "$ " + "%.2f".format(number) + suffix
-}
-
-private val trillion = Pair(1_000_000_000_000f, "T")
-private val billion = Pair(1_000_000_000f, "B")
-private val million = Pair(1_000_000f, "M")
-private val thousand = Pair(1_000f, "K")
-
-private fun Float.toPercentString() = "%.2f".format(this) + "%"

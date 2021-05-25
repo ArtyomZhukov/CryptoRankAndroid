@@ -1,9 +1,7 @@
 package com.zhukovartemvl.cryptorank.overview.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -67,8 +65,8 @@ private fun TitleText(
             )
             if (ascending != null) {
                 val triangleShapeDirection =
-                    if (ascending) TriangleShapeDirection.Top
-                    else TriangleShapeDirection.Bottom
+                    if (ascending) TriangleShapeDirection.Bottom
+                    else TriangleShapeDirection.Top
                 Box(
                     modifier = Modifier
                         .padding(start = 10.dp)

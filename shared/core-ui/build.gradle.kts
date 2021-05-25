@@ -52,20 +52,22 @@ dependencies {
     api("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
     api("androidx.compose.runtime:runtime-livedata:${rootProject.extra["compose_version"]}")
 
-
     //Navigation
     api("androidx.navigation:navigation-ui-ktx:2.3.5")
     api("androidx.navigation:navigation-compose:2.4.0-alpha01")
 
     //UI - Compose - Accompanist
     api("com.google.accompanist:accompanist-swiperefresh:0.8.1")
-    api( "com.google.accompanist:accompanist-glide:0.10.0")
+    api( "com.google.accompanist:accompanist-coil:0.10.0")
 
+    //Coil SVG Loader
+    api("io.coil-kt:coil-svg:1.2.1")
+
+    //For viewModel() function
     api("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
 
     //DI-Compose
     api("io.insert-koin:koin-android:3.0.2")
-
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
