@@ -14,6 +14,6 @@ fun CoinEntity.transform(): CoinDTO {
         marketCap = marketCap,
         change = change,
         rank = rank,
-        sparkline = sparkline
+        sparkline = sparkline.filterNotNull()
     )
 }
