@@ -11,6 +11,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.zhukovartemvl.cryptorank.overview.OverviewScreenContract.*
 import com.zhukovartemvl.cryptorank.overview.component.CoinRankListHeader
 import com.zhukovartemvl.cryptorank.overview.component.CoinShimmers
@@ -38,20 +40,26 @@ fun OverviewScreen(
             Text(stringResource(id = R.string.app_name))
         })
     }) {
-        when (val screenState = state.screenState) {
-            ScreenState.Loading -> CoinShimmers()
-            ScreenState.Default -> CoinsList(
-                coins = state.coins,
-                listOrder = state.listOrder,
-                onCryptocurrencyClick = { viewModel.setEvent(Event.OnCryptocurrencyClicked) },
-                onPriceClick = { viewModel.setEvent(Event.OnPriceClicked) },
-                onSparklineClick = { viewModel.setEvent(Event.OnDayChangeClicked) }
-            )
-            is ScreenState.Error -> {
-                Text(screenState.errorMessage)
+        val swipeRefreshState =
+            rememberSwipeRefreshState(state.screenState == ScreenState.Refreshing)
+        SwipeRefresh(
+            state = swipeRefreshState,
+            onRefresh = { viewModel.setEvent(Event.Refresh) }
+        ) {
+            when (state.screenState) {
+                ScreenState.Loading -> CoinShimmers()
+                ScreenState.Refreshing -> CoinShimmers()
+                ScreenState.Default -> {
+                    CoinsList(
+                        coins = state.coins,
+                        listOrder = state.listOrder,
+                        onCryptocurrencyClick = { viewModel.setEvent(Event.OnCryptocurrencyClicked) },
+                        onPriceClick = { viewModel.setEvent(Event.OnPriceClicked) },
+                        onSparklineClick = { viewModel.setEvent(Event.OnDayChangeClicked) }
+                    )
+                }
+                ScreenState.Sorting -> CoinRankListHeader()
             }
-            ScreenState.Sorting -> CoinRankListHeader()
-            ScreenState.Refreshing -> Unit
         }
     }
 }
