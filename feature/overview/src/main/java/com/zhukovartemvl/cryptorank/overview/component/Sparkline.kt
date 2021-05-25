@@ -20,9 +20,9 @@ import kotlin.math.min
 internal fun Sparkline(
     modifier: Modifier = Modifier,
     lineColor: Color = Color.Green,
-    lineWidth: Float = 4f,
+    lineWidth: Float = 3f,
     values: List<Float>,
-    shouldAnimate: Boolean = true,
+    shouldAnimate: Boolean = true
 ) {
     val yValues = remember { values }
     val x = remember { Animatable(0f) }

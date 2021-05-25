@@ -3,7 +3,7 @@ package com.zhukovartemvl.cryptorank.core.utils
 
 fun Float.toPriceString() = "$ " + "%.2f".format(this)
 
-fun Float.toPercentString() = "%.2f".format(this) + "%"
+fun Float.toPercentString() = (if (this > 0) "+" else "") + "%.2f".format(this) + "%"
 
 fun Float.toMarketCapString(): String {
     val (number, suffix) = when {

@@ -68,14 +68,8 @@ class OverviewScreenViewModel : BaseViewModel<Event, State, Action>(), KoinCompo
                 ascending = !currentState.listOrder.ascending
             }
         }
-
-        val coins = currentState.coins
-        setState {
-            copy(
-                coins = coins.sort(listOrder),
-                listOrder = listOrder
-            )
-        }
+        setState { copy(screenState = ScreenState.Sorting, listOrder = listOrder) }
+        loadCoins()
     }
 
     private fun List<CoinDTO>.sort(listOrder: ListOrder): List<CoinDTO> {

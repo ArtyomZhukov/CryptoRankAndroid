@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CoinShimmers() {
     Column {
+        CoinRankListHeader()
         repeat(20) {
             CoinShimmerItem()
         }

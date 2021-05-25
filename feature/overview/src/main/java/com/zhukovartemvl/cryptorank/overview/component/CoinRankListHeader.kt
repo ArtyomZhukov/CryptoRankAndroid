@@ -9,40 +9,42 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.zhukovartemvl.cryptorank.core_ui.theme.ColorDarkGrey
 import com.zhukovartemvl.cryptorank.overview.OverviewScreenContract.*
 import com.zhukovartemvl.cryptorank.core_ui.theme.CryptoRankText
 import com.zhukovartemvl.cryptorank.core_ui.theme.TriangleShape
 import com.zhukovartemvl.cryptorank.core_ui.theme.TriangleShapeDirection
+import com.zhukovartemvl.cryptorank.resources.R
 
 
 @Composable
 fun CoinRankListHeader(
-    listOrder: ListOrder,
-    onCryptocurrencyClick: () -> Unit,
-    onPriceClick: () -> Unit,
-    onSparklineClick: () -> Unit
+    listOrder: ListOrder? = null,
+    onCryptocurrencyClick: () -> Unit = {},
+    onPriceClick: () -> Unit = {},
+    onSparklineClick: () -> Unit = {}
 ) {
     Card(elevation = 4.dp) {
         Row(modifier = Modifier) {
-            TitleText(
+            TitleButton(
                 modifier = Modifier.weight(5f),
                 ascending = if (listOrder is ListOrder.MarketCap) listOrder.ascending else null,
-                text = "Cryptocurrency",
+                text = stringResource(id = R.string.cryptocurrency),
                 onClick = onCryptocurrencyClick
             )
-            TitleText(
+            TitleButton(
                 modifier = Modifier.weight(2f),
                 ascending = if (listOrder is ListOrder.Price) listOrder.ascending else null,
-                text = "Price",
+                text = stringResource(id = R.string.price),
                 onClick = onPriceClick
             )
-            TitleText(
+            TitleButton(
                 modifier = Modifier.weight(2f),
                 ascending = if (listOrder is ListOrder.DayChange) listOrder.ascending else null,
-                text = "24H",
+                text = stringResource(id = R.string.day_change),
                 onClick = onSparklineClick
             )
         }
@@ -50,7 +52,7 @@ fun CoinRankListHeader(
 }
 
 @Composable
-private fun TitleText(
+private fun TitleButton(
     text: String,
     ascending: Boolean? = null,
     modifier: Modifier,
@@ -70,10 +72,10 @@ private fun TitleText(
                 Box(
                     modifier = Modifier
                         .padding(start = 10.dp)
-                        .size(10.dp)
+                        .size(8.dp)
                         .clip(shape = TriangleShape(triangleShapeDirection))
                         .align(Alignment.CenterVertically)
-                        .background(Color.Black)
+                        .background(color = ColorDarkGrey)
                 )
             }
         }

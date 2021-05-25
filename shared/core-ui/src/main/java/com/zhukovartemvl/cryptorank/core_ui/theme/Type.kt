@@ -30,22 +30,18 @@ val Typography = Typography(
 )
 
 object CryptoRankText {
-    val Title = TextStyle(
-        fontWeight = FontWeight.Bold,
-        fontSize = 18.sp,
-        color = Color.Black
-    )
     val ItemTitleText = TextStyle(
         fontWeight = FontWeight.Bold,
-        fontSize = 16.sp,
-        color = Color.Black
+        fontSize = 14.sp,
+        color = ColorDarkGrey
     )
     val ItemText = TextStyle(
-        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        fontSize = 15.sp,
         color = Color.Black
     )
     val SecondaryItemText = TextStyle(
-        fontSize = 16.sp,
+        fontSize = 14.sp,
         color = Color.Gray
     )
 }

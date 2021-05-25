@@ -17,8 +17,9 @@ class OverviewScreenContract {
     sealed class ScreenState {
         object Loading : ScreenState()
         object Default : ScreenState()
-        data class Error(val errorMessage: String) : ScreenState()
+        object Sorting : ScreenState()
         object Refreshing : ScreenState()
+        data class Error(val errorMessage: String) : ScreenState()
     }
 
     sealed class ListOrder(var ascending: Boolean) {

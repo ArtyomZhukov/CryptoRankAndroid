@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -16,6 +15,8 @@ import com.google.accompanist.coil.rememberCoilPainter
 import com.zhukovartemvl.cryptorank.core.utils.toMarketCapString
 import com.zhukovartemvl.cryptorank.core.utils.toPercentString
 import com.zhukovartemvl.cryptorank.core.utils.toPriceString
+import com.zhukovartemvl.cryptorank.core_ui.theme.ColorGreen
+import com.zhukovartemvl.cryptorank.core_ui.theme.ColorRed
 import com.zhukovartemvl.cryptorank.core_ui.theme.CryptoRankText
 import com.zhukovartemvl.cryptorank.core_ui.utils.getSvgImageLoader
 
@@ -45,12 +46,13 @@ internal fun CoinItem(
                         .align(Alignment.CenterVertically),
                     text = rank.toString(),
                     textAlign = TextAlign.Center,
-                    style = CryptoRankText.ItemText
+                    style = CryptoRankText.SecondaryItemText
                 )
                 Image(
                     modifier = Modifier
                         .padding(6.dp)
-                        .size(32.dp),
+                        .size(32.dp)
+                        .padding(end = 4.dp),
                     painter = rememberCoilPainter(
                         request = iconUrl,
                         imageLoader = getSvgImageLoader()
@@ -59,16 +61,16 @@ internal fun CoinItem(
                     contentDescription = null
                 )
 
-                Column(modifier = Modifier.padding(start = 4.dp)) {
+                Column {
                     Text(
                         text = name,
-                        style = CryptoRankText.ItemTitleText,
+                        style = CryptoRankText.ItemText,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                     Text(
                         text = symbol,
-                        style = CryptoRankText.ItemText
+                        style = CryptoRankText.SecondaryItemText
                     )
                 }
             }
@@ -76,23 +78,23 @@ internal fun CoinItem(
                 Column {
                     Text(
                         text = price.toPriceString(),
-                        style = CryptoRankText.ItemTitleText
+                        style = CryptoRankText.ItemText
                     )
                     Text(
                         text = marketCap.toMarketCapString(),
-                        style = CryptoRankText.ItemText
+                        style = CryptoRankText.SecondaryItemText
                     )
                 }
             }
             Row(modifier = Modifier.weight(2f)) {
-                val color = if (change >= 0) Color.Green else Color.Red
+                val color = if (change >= 0) ColorGreen else ColorRed
 
                 Column {
                     Text(
                         text = change.toPercentString(),
                         modifier = Modifier.fillMaxWidth(),
                         color = color,
-                        style = CryptoRankText.ItemTitleText,
+                        style = CryptoRankText.ItemText,
                         textAlign = TextAlign.Center
                     )
                     Sparkline(
