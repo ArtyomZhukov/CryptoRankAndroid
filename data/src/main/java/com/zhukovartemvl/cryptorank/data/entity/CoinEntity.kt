@@ -15,7 +15,7 @@ data class CoinEntity(
     @SerialName("iconUrl") val iconUrl: String,
     @SerialName("price") val price: Float,
     @SerialName("marketCap") val marketCap: Float,
-    @SerialName("change") val change: Float,
+    @SerialName("change") val change: Float?,
     @SerialName("rank") val rank: Int,
     @SerialName("sparkline") val sparkline: List<Float?>
 ) {

@@ -12,7 +12,7 @@ fun CoinEntity.transform(): CoinDTO {
         iconUrl = iconUrl,
         price = price,
         marketCap = marketCap,
-        change = change,
+        change = change ?: 0f,
         rank = rank,
         sparkline = sparkline.filterNotNull()
     )
