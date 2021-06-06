@@ -57,7 +57,7 @@ dependencies {
     api("androidx.navigation:navigation-compose:2.4.0-alpha01")
 
     //UI - Compose - Accompanist
-    api("com.google.accompanist:accompanist-swiperefresh:0.10.0")
+    api("com.google.accompanist:accompanist-swiperefresh:0.11.1")
     api( "com.google.accompanist:accompanist-coil:0.10.0")
 
     //Coil SVG Loader
